@@ -17,6 +17,7 @@ dependencies = [
     "pymongo>=4.16.0",
     "python-dotenv>=1.2.2",
     "starlette>=1.0.0",
+    "typesafe-sdk>=0.7.2",
     "uvicorn>=0.44.0",
     "uvloop>=0.22.1",
     "watchfiles>=1.1.1",

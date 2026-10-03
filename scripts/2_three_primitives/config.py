@@ -16,6 +16,29 @@ INPUT_PRICE_PER_MILLION_USD = 0.042  # jev-1.13.0, docs.typesafe.ai/models, 2026
 DATASET_BLOB = "539405fa5999f6be063f750c5f81abbf307e7c11"
 NOUL_THRESHOLDS = [0.3, 0.5, 0.7, 0.9]
 
+# Routing (step 7). Thresholds chosen from run 2026-10-03T125726Z on dataset v1; see docs/notes.md.
+NEEDS_HUMAN_THRESHOLD = 0.20  # 100% recall, 38% false alarms on dataset v1
+FRAUD_ESCALATE_THRESHOLD = 0.25  # 100% recall, 8% false alarms on dataset v1
+CATEGORY_MIN_CONFIDENCE = 0.5  # below this the category is a guess
+SHORT_MESSAGE_MAX_WORDS = 3  # too little text for the model to judge
+# Deterministic: any of these (case-insensitive substring) escalates, whatever Jev says.
+ESCALATE_KEYWORDS = [
+    "fraud",
+    "unauthorized",
+    "unauthorised",
+    "not authorize",
+    "didn't make",
+    "did not make",
+    "never do this payment",
+    "stolen",
+    "hacked",
+    "scam",
+    "someone used",
+    "someone took",
+    "someone changed",
+    "lost my card",
+]
+
 CATEGORY_LABELS: dict[str, str] = {
     "unauthorized_charge": "Customer reports a charge, transfer or withdrawal they did not make or approve, including charges after they cancelled.",
     "billing_question": "Fees, statements, refunds, or a charge the customer made but disputes (double charge, wrong amount).",

@@ -10,6 +10,7 @@ import statistics
 import subprocess
 import sys
 import time
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -122,9 +123,11 @@ def report(path: Path) -> None:
 
     print(f"\nRun:      {path.name}")
     print(f"Date:     {record['run_at_utc']}")
+    print(f"Triager:  {record.get('triager', 'jev')}")
     print(f"Model:    requested {record['requested_model']}, reported {', '.join(record['reported_models'])}")
     print(f"Dataset:  {record['dataset']['path']} @ blob {record['dataset']['git_blob'][:7]}")
-    print(f"Messages: {len(ok)} ok, {len(failed)} failed")
+    kinds = Counter(r.get("error_kind", "api") for r in failed)
+    print(f"Messages: {len(ok)} ok, {len(failed)} failed  (malformed output {kinds['malformed']}, api errors {kinds['api']})")
     for r in failed:
         print(f"  id {r['id']}: {r['error']}")
     if not ok:
@@ -153,10 +156,13 @@ def report(path: Path) -> None:
     print("\nLatency per message (s)")
     print(f"  median {statistics.median(latencies):.2f}   mean {statistics.mean(latencies):.2f}   max {max(latencies):.2f}")
     print("Cost")
-    print(f"  per message {statistics.mean(costs):.8f} USD   total {sum(costs):.6f} USD   (tokens x price)")
+    print(f"  per message {statistics.mean(costs):.8f} USD   total {sum(costs):.6f} USD   ({record.get('cost_source', 'tokens x price')})")
     if reported:
         print(f"  OpenRouter reported total {sum(reported):.6f} USD")
-    print(f"  mean input tokens {statistics.mean(r['input_tokens'] for r in ok):.0f}")
+    print(f"  mean input tokens {statistics.mean(r['input_tokens'] for r in ok):.0f}   mean output tokens {statistics.mean(r['output_tokens'] for r in ok):.0f}")
+    reasoning = [r["reasoning_tokens"] for r in ok if r.get("reasoning_tokens") is not None]
+    if reasoning:
+        print(f"  mean reasoning tokens {statistics.mean(reasoning):.0f} (billed as output)")
 
     worst = sorted(((miss, r, *rest) for r in ok for miss, *rest in misses(r)), key=lambda item: item[0], reverse=True)[:10]
     print("\n10 worst misses (miss = 1 - probability given to your label)")

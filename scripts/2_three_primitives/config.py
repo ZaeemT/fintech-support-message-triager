@@ -12,6 +12,13 @@ BASE_URL = "https://openrouter.ai/api"
 API_KEY_ENV = "OPENROUTER_API_KEY"
 INPUT_PRICE_PER_MILLION_USD = 0.042  # jev-1.13.0, docs.typesafe.ai/models, 2026-10-03; output tokens free
 
+# LLM baseline (step 8): pinned version, same OpenRouter key. Price is billed by OpenRouter and read from usage.cost.
+LLM_MODEL = "google/gemini-2.5-flash"
+LLM_URL = "https://openrouter.ai/api/v1/chat/completions"
+# Without a cap OpenRouter reserves credit for the model maximum (65,535 tokens for this model).
+# Reasoning tokens count against this cap too; the JSON answer itself needs ~50.
+LLM_MAX_TOKENS = 1000
+
 # Evaluation: frozen dataset v1 (commit 7da39c6). `git hash-object data/messages.csv` must match.
 DATASET_BLOB = "539405fa5999f6be063f750c5f81abbf307e7c11"
 NOUL_THRESHOLDS = [0.3, 0.5, 0.7, 0.9]

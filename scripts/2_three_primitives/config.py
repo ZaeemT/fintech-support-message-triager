@@ -12,10 +12,10 @@ BASE_URL = "https://openrouter.ai/api"
 API_KEY_ENV = "OPENROUTER_API_KEY"
 
 CATEGORY_LABELS: dict[str, str] = {
-    "unauthorized_charge": "Customer reports a charge, transfer or withdrawal they say they did not make or approve.",
-    "billing_question": "Fees, statements, refunds, or a charge the customer recognizes but disputes (double charge, wrong amount).",
+    "unauthorized_charge": "Customer reports a charge, transfer or withdrawal they did not make or approve, including charges after they cancelled.",
+    "billing_question": "Fees, statements, refunds, or a charge the customer made but disputes (double charge, wrong amount).",
     "account_access": "Can't log in, locked out, password or 2FA reset, or login details changed by someone else.",
-    "feature_request": "Asks for a product capability or change that doesn't exist today.",
+    "card_issue": "Problem with the card itself: lost, stolen, blocked, declined, damaged, not arrived, activation or PIN.",
     "other": "Anything else.",
 }
 
@@ -39,7 +39,10 @@ QUESTIONS = {
         instructions="Does the customer suspect someone else used their account, card or money without permission?",
         criteria={
             "true": "The customer says or implies a third party made a transaction, accessed the account, or scammed them.",
-            "false": "The customer recognizes all activity; it is a billing error, a fee, or a general question.",
+            "false": (
+                "The customer recognizes all activity; it is a billing error, a fee, or a general question. "
+                "Also no: an attempt with no loss, exposure without misuse (e.g. a stolen card with no charges), or a weak hunch."
+            ),
         },
     ),
     "needs_human": Noul(

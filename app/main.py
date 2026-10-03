@@ -8,6 +8,8 @@ from .core.exceptions import BaseAPIException, NotFoundException, BadRequestExce
 from .core.responses import ErrorResponse, ServiceResponse
 from .modules.users.controller import router as user_router
 from .modules.auth.controller import router as auth_router
+from .modules.triage.controller import router as triage_router
+from .integrations.jev import create_jev_client
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -17,10 +19,12 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """
     Application lifespan context manager to handle startup and shutdown events.
-    Connects to the database on startup and closes the connection on shutdown.
+    Connects to the database and creates the shared Jev client on startup; closes both on shutdown.
     """
     await database.connect_to_mongodb()
+    app.state.jev_client = create_jev_client()
     yield
+    await app.state.jev_client.aclose()
     await database.close_mongodb_connection()
 
 
@@ -50,8 +54,9 @@ async def base_api_exception_handler(request, exc: BaseAPIException):
         content=error_response.model_dump()
     )
 
-app.include_router(user_router, prefix="/v1/users", tags=["users"])
-app.include_router(auth_router, prefix="/v1/auth", tags=["auth"])
+# app.include_router(user_router, prefix="/v1/users", tags=["users"])
+# app.include_router(auth_router, prefix="/v1/auth", tags=["auth"])
+app.include_router(triage_router, prefix="/v1/triage", tags=["triage"])
 
 
 @app.get("/")

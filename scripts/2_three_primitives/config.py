@@ -10,6 +10,11 @@ from typesafe_sdk import Choice, Noul, Score
 MODEL = "typesafe/jev-1.13"
 BASE_URL = "https://openrouter.ai/api"
 API_KEY_ENV = "OPENROUTER_API_KEY"
+INPUT_PRICE_PER_MILLION_USD = 0.042  # jev-1.13.0, docs.typesafe.ai/models, 2026-10-03; output tokens free
+
+# Evaluation: frozen dataset v1 (commit 7da39c6). `git hash-object data/messages.csv` must match.
+DATASET_BLOB = "539405fa5999f6be063f750c5f81abbf307e7c11"
+NOUL_THRESHOLDS = [0.3, 0.5, 0.7, 0.9]
 
 CATEGORY_LABELS: dict[str, str] = {
     "unauthorized_charge": "Customer reports a charge, transfer or withdrawal they did not make or approve, including charges after they cancelled.",

@@ -1,0 +1,2752 @@
+{
+  "run_at_utc": "2026-10-03T12:57:26+00:00",
+  "requested_model": "typesafe/jev-1.13",
+  "reported_models": [
+    "typesafe/jev-1.13-20260917"
+  ],
+  "dataset": {
+    "path": "data/messages.csv",
+    "git_blob": "539405fa5999f6be063f750c5f81abbf307e7c11"
+  },
+  "sdk_version": "0.7.2",
+  "questions": {
+    "category": {
+      "type": "choice",
+      "instructions": "What is this customer support message mainly about?",
+      "criteria": {
+        "unauthorized_charge": "Customer reports a charge, transfer or withdrawal they did not make or approve, including charges after they cancelled.",
+        "billing_question": "Fees, statements, refunds, or a charge the customer made but disputes (double charge, wrong amount).",
+        "account_access": "Can't log in, locked out, password or 2FA reset, or login details changed by someone else.",
+        "card_issue": "Problem with the card itself: lost, stolen, blocked, declined, damaged, not arrived, activation or PIN.",
+        "other": "Anything else."
+      }
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "How urgently does this customer support message need a response?",
+      "criteria": [
+        "Low: no time pressure, nothing at risk.",
+        "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+        "High: money may be actively leaving or account control may be compromised; needs action today."
+      ]
+    },
+    "fraud_related": {
+      "type": "noul",
+      "instructions": "Does the customer suspect someone else used their account, card or money without permission?",
+      "criteria": {
+        "true": "The customer says or implies a third party made a transaction, accessed the account, or scammed them.",
+        "false": "The customer recognizes all activity; it is a billing error, a fee, or a general question. Also no: an attempt with no loss, exposure without misuse (e.g. a stolen card with no charges), or a weak hunch."
+      }
+    },
+    "needs_human": {
+      "type": "noul",
+      "instructions": "Should a human support agent handle this message rather than an automated reply?",
+      "criteria": {
+        "true": "A dispute, suspected fraud, a lockout, a distressed customer, or anything needing account investigation or judgment.",
+        "false": "Fully answerable with standard help-center information."
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "1",
+      "message": "Someone took $480 out of my checking account last night. I didn't do it and I still have my card.",
+      "tags": "",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.738,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 728,
+      "output_tokens": 114,
+      "cost_usd": 3.0576e-05,
+      "reported_cost_usd": 3.0576e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "other": 0,
+            "account_access": 0,
+            "billing_question": 0,
+            "card_issue": 0,
+            "unauthorized_charge": 1
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.94,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.06,
+            "2": 0.94
+          },
+          "confidence": 0.91
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.97
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.97
+        }
+      }
+    },
+    {
+      "id": "2",
+      "message": "There are three charges from STREAMFLIX for $15.99 and I only have one subscription.",
+      "tags": "",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 1.023,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 725,
+      "output_tokens": 111,
+      "cost_usd": 3.045e-05,
+      "reported_cost_usd": 3.045e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "account_access": 0,
+            "card_issue": 0,
+            "billing_question": 0.77,
+            "unauthorized_charge": 0.23,
+            "other": 0
+          },
+          "confidence": 0.71
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.34,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.66,
+            "2": 0.34
+          },
+          "confidence": 0.48
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.3
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.88
+        }
+      }
+    },
+    {
+      "id": "3",
+      "message": "How do I change the PIN on my debit card?",
+      "tags": "",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.413,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 713,
+      "output_tokens": 111,
+      "cost_usd": 2.9946e-05,
+      "reported_cost_usd": 2.9946e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 0,
+            "card_issue": 1,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.04,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.96,
+            "1": 0.04,
+            "2": 0
+          },
+          "confidence": 0.94
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.03
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.11
+        }
+      }
+    },
+    {
+      "id": "4",
+      "message": "locked out",
+      "tags": "very_short",
+      "expected": {
+        "category": "account_access",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.495,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 704,
+      "output_tokens": 111,
+      "cost_usd": 2.9568000000000002e-05,
+      "reported_cost_usd": 2.9568e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "account_access": 1,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 0,
+            "card_issue": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.07,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.93,
+            "2": 0.07
+          },
+          "confidence": 0.89
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.11
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.86
+        }
+      }
+    },
+    {
+      "id": "5",
+      "message": "card declined",
+      "tags": "very_short",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.525,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 704,
+      "output_tokens": 111,
+      "cost_usd": 2.9568000000000002e-05,
+      "reported_cost_usd": 2.9568e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "card_issue": 1,
+            "account_access": 0,
+            "other": 0,
+            "unauthorized_charge": 0,
+            "billing_question": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.02,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.96,
+            "2": 0.03
+          },
+          "confidence": 0.95
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.1
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.42
+        }
+      }
+    },
+    {
+      "id": "6",
+      "message": "Got a text saying my account is suspended and I need to click a link to verify. Is this you?",
+      "tags": "fraud_mention_not_fraud",
+      "expected": {
+        "category": "other",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.38,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 724,
+      "output_tokens": 111,
+      "cost_usd": 3.0408e-05,
+      "reported_cost_usd": 3.0408e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "other": 0.08,
+            "billing_question": 0,
+            "card_issue": 0,
+            "unauthorized_charge": 0,
+            "account_access": 0.92
+          },
+          "confidence": 0.9
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.65,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.3,
+            "2": 0.68
+          },
+          "confidence": 0.48
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.25
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.87
+        }
+      }
+    },
+    {
+      "id": "7",
+      "message": "Wow, great job charging me a $35 overdraft fee on a $2 coffee. Really loving this bank.",
+      "tags": "sarcasm",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.379,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 726,
+      "output_tokens": 111,
+      "cost_usd": 3.0492000000000002e-05,
+      "reported_cost_usd": 3.0492e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "billing_question": 1,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "account_access": 0,
+            "card_issue": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.95,
+            "2": 0.03
+          },
+          "confidence": 0.92
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.81
+        }
+      }
+    },
+    {
+      "id": "8",
+      "message": "I forgot my password and the reset email never arrives. Also, any plans to let me pay with my watch?",
+      "tags": "two_issues",
+      "expected": {
+        "category": "account_access",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 1.007,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 725,
+      "output_tokens": 111,
+      "cost_usd": 3.045e-05,
+      "reported_cost_usd": 3.045e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "billing_question": 0,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "account_access": 1,
+            "card_issue": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.03,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.95,
+            "2": 0.04
+          },
+          "confidence": 0.93
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.03
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.83
+        }
+      }
+    },
+    {
+      "id": "9",
+      "message": "My wallet was stolen this morning with my card in it. No strange charges yet but I want to block the card.",
+      "tags": "",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 2,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.366,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 726,
+      "output_tokens": 111,
+      "cost_usd": 3.0492000000000002e-05,
+      "reported_cost_usd": 3.0492e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "account_access": 0,
+            "billing_question": 0,
+            "card_issue": 1,
+            "unauthorized_charge": 0,
+            "other": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.6,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.4,
+            "2": 0.6
+          },
+          "confidence": 0.4
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.11
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      }
+    },
+    {
+      "id": "10",
+      "message": "i not recieve my money transfer to my mother since 3 days, where is it?",
+      "tags": "non_native",
+      "expected": {
+        "category": "other",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.449,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 721,
+      "output_tokens": 110,
+      "cost_usd": 3.0282000000000002e-05,
+      "reported_cost_usd": 3.0282e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0.94,
+            "billing_question": 0.06,
+            "card_issue": 0,
+            "account_access": 0
+          },
+          "confidence": 0.93
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.01,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.99,
+            "2": 0.01
+          },
+          "confidence": 0.98
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.03
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.8
+        }
+      }
+    },
+    {
+      "id": "11",
+      "message": "unknown charge $73",
+      "tags": "very_short",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 1,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.364,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 707,
+      "output_tokens": 114,
+      "cost_usd": 2.9694000000000004e-05,
+      "reported_cost_usd": 2.9694e-05,
+      "answers": {
+        "urgency": {
+          "type": "score",
+          "score": 1.15,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.85,
+            "2": 0.15
+          },
+          "confidence": 0.77
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.37
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.9
+        },
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "other": 0,
+            "card_issue": 0,
+            "unauthorized_charge": 0.97,
+            "account_access": 0,
+            "billing_question": 0.03
+          },
+          "confidence": 0.96
+        }
+      }
+    },
+    {
+      "id": "12",
+      "message": "Someone changed the email and phone number on my account and now I can't log in.",
+      "tags": "",
+      "expected": {
+        "category": "account_access",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.377,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 720,
+      "output_tokens": 111,
+      "cost_usd": 3.0240000000000002e-05,
+      "reported_cost_usd": 3.024e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "card_issue": 0,
+            "account_access": 1,
+            "billing_question": 0,
+            "other": 0,
+            "unauthorized_charge": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.82,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.18,
+            "2": 0.82
+          },
+          "confidence": 0.73
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.82
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.95
+        }
+      }
+    },
+    {
+      "id": "13",
+      "message": "Can I get a paper statement mailed to me every month?",
+      "tags": "",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.344,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 714,
+      "output_tokens": 111,
+      "cost_usd": 2.9988e-05,
+      "reported_cost_usd": 2.9988e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "account_access": 0,
+            "billing_question": 1,
+            "unauthorized_charge": 0,
+            "card_issue": 0,
+            "other": 0
+          },
+          "confidence": 0.99
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 1,
+            "1": 0,
+            "2": 0
+          },
+          "confidence": 0.99
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.13
+        }
+      }
+    },
+    {
+      "id": "14",
+      "message": "I watched a video about the fraud protection on your cards. How does it work exactly?",
+      "tags": "fraud_mention_not_fraud",
+      "expected": {
+        "category": "other",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.37,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 720,
+      "output_tokens": 110,
+      "cost_usd": 3.0240000000000002e-05,
+      "reported_cost_usd": 3.024e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "account_access": 0,
+            "card_issue": 0.01,
+            "unauthorized_charge": 0,
+            "billing_question": 0,
+            "other": 0.99
+          },
+          "confidence": 0.98
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.01,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.99,
+            "1": 0.01,
+            "2": 0
+          },
+          "confidence": 0.98
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.06
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.12
+        }
+      }
+    },
+    {
+      "id": "15",
+      "message": "There's a $1.00 charge from a company I've never heard of. Is it a test charge?",
+      "tags": "",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 1,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.386,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 726,
+      "output_tokens": 114,
+      "cost_usd": 3.0492000000000002e-05,
+      "reported_cost_usd": 3.0492e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "other": 0,
+            "unauthorized_charge": 0.87,
+            "billing_question": 0.13,
+            "card_issue": 0,
+            "account_access": 0
+          },
+          "confidence": 0.83
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.22,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.03,
+            "1": 0.72,
+            "2": 0.25
+          },
+          "confidence": 0.58
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.32
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.77
+        }
+      }
+    },
+    {
+      "id": "16",
+      "message": "help",
+      "tags": "very_short",
+      "expected": {
+        "category": "other",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.415,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 703,
+      "output_tokens": 110,
+      "cost_usd": 2.9526000000000005e-05,
+      "reported_cost_usd": 2.9526e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "account_access": 0,
+            "card_issue": 0,
+            "other": 1,
+            "unauthorized_charge": 0,
+            "billing_question": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.28,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.73,
+            "1": 0.26,
+            "2": 0.01
+          },
+          "confidence": 0.58
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.16
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.35
+        }
+      }
+    },
+    {
+      "id": "17",
+      "message": "My son made purchases in a game using my card without asking me. $230 total.",
+      "tags": "family_member",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 1,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.511,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 722,
+      "output_tokens": 114,
+      "cost_usd": 3.0324000000000003e-05,
+      "reported_cost_usd": 3.0324e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "card_issue": 0,
+            "unauthorized_charge": 1,
+            "other": 0,
+            "billing_question": 0,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.18,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.82,
+            "2": 0.18
+          },
+          "confidence": 0.72
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.94
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.9
+        }
+      }
+    },
+    {
+      "id": "18",
+      "message": "I bought a laptop for $1,200 and the shop never delivered it. I want my money back.",
+      "tags": "",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.509,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 726,
+      "output_tokens": 111,
+      "cost_usd": 3.0492000000000002e-05,
+      "reported_cost_usd": 3.0492e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "card_issue": 0,
+            "account_access": 0,
+            "other": 0.11,
+            "billing_question": 0.89
+          },
+          "confidence": 0.86
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.05,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.95,
+            "2": 0.05
+          },
+          "confidence": 0.92
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.04
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.89
+        }
+      }
+    },
+    {
+      "id": "19",
+      "message": "A guy on a dating site convinced me to send him $3,000 for a plane ticket and now he's blocked me.",
+      "tags": "scam",
+      "expected": {
+        "category": "other",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.41,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 730,
+      "output_tokens": 110,
+      "cost_usd": 3.066e-05,
+      "reported_cost_usd": 3.066e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "account_access": 0,
+            "unauthorized_charge": 0.07,
+            "other": 0.89,
+            "card_issue": 0,
+            "billing_question": 0.04
+          },
+          "confidence": 0.86
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.05,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.95,
+            "2": 0.05
+          },
+          "confidence": 0.92
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.26
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.93
+        }
+      }
+    },
+    {
+      "id": "20",
+      "message": "Your app keeps crashing when I open the cards tab.",
+      "tags": "",
+      "expected": {
+        "category": "other",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.513,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 713,
+      "output_tokens": 110,
+      "cost_usd": 2.9946e-05,
+      "reported_cost_usd": 2.9946e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "card_issue": 0,
+            "account_access": 0,
+            "other": 1,
+            "billing_question": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.89,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.11,
+            "1": 0.89,
+            "2": 0
+          },
+          "confidence": 0.83
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.4
+        }
+      }
+    },
+    {
+      "id": "21",
+      "message": "My new card arrived but the activation code in the letter doesn't work.",
+      "tags": "",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.356,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 717,
+      "output_tokens": 111,
+      "cost_usd": 3.0114e-05,
+      "reported_cost_usd": 3.0114e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "billing_question": 0,
+            "unauthorized_charge": 0,
+            "account_access": 0,
+            "card_issue": 1,
+            "other": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.99,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.99,
+            "2": 0
+          },
+          "confidence": 0.98
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.04
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.56
+        }
+      }
+    },
+    {
+      "id": "22",
+      "message": "Can I get a replacement card? The chip on mine is cracked.",
+      "tags": "",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.397,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 716,
+      "output_tokens": 111,
+      "cost_usd": 3.0072000000000003e-05,
+      "reported_cost_usd": 3.0072e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "card_issue": 1,
+            "other": 0,
+            "billing_question": 0,
+            "unauthorized_charge": 0,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.91,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.12,
+            "1": 0.85,
+            "2": 0.03
+          },
+          "confidence": 0.77
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.31
+        }
+      }
+    },
+    {
+      "id": "23",
+      "message": "Thank you for fixing my issue so fast yesterday!",
+      "tags": "",
+      "expected": {
+        "category": "other",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.356,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 712,
+      "output_tokens": 110,
+      "cost_usd": 2.9904000000000004e-05,
+      "reported_cost_usd": 2.9904e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "card_issue": 0,
+            "other": 1,
+            "unauthorized_charge": 0,
+            "billing_question": 0,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 1,
+            "1": 0,
+            "2": 0
+          },
+          "confidence": 1
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.13
+        }
+      }
+    },
+    {
+      "id": "24",
+      "message": "I DID NOT AUTHORIZE THIS!!! $89.50 FROM ONLINE GADGETS, FIX IT NOW",
+      "tags": "all_caps",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.392,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 726,
+      "output_tokens": 114,
+      "cost_usd": 3.0492000000000002e-05,
+      "reported_cost_usd": 3.0492e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "unauthorized_charge": 1,
+            "card_issue": 0,
+            "other": 0,
+            "account_access": 0,
+            "billing_question": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.69,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.31,
+            "2": 0.69
+          },
+          "confidence": 0.53
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.94
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.97
+        }
+      }
+    },
+    {
+      "id": "25",
+      "message": "Can't log in, says my account is locked for security reasons. I'm traveling abroad and need to pay for my hotel tonight.",
+      "tags": "",
+      "expected": {
+        "category": "account_access",
+        "urgency": 2,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.402,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 729,
+      "output_tokens": 111,
+      "cost_usd": 3.0618000000000004e-05,
+      "reported_cost_usd": 3.0618e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "account_access": 1,
+            "other": 0,
+            "billing_question": 0,
+            "card_issue": 0,
+            "unauthorized_charge": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.83,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.17,
+            "2": 0.83
+          },
+          "confidence": 0.75
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.21
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.94
+        }
+      }
+    },
+    {
+      "id": "26",
+      "message": "Ich kann mich nicht mehr einloggen.",
+      "tags": "non_english",
+      "expected": {
+        "category": "account_access",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.453,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 711,
+      "output_tokens": 111,
+      "cost_usd": 2.9862000000000003e-05,
+      "reported_cost_usd": 2.9862e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "account_access": 1,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 0,
+            "card_issue": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.98,
+            "2": 0.01
+          },
+          "confidence": 0.98
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.05
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.64
+        }
+      }
+    },
+    {
+      "id": "27",
+      "message": "fraud",
+      "tags": "very_short",
+      "expected": {
+        "category": "other",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.416,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 704,
+      "output_tokens": 114,
+      "cost_usd": 2.9568000000000002e-05,
+      "reported_cost_usd": 2.9568e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "unauthorized_charge": 0.63,
+            "billing_question": 0,
+            "other": 0.37,
+            "card_issue": 0,
+            "account_access": 0
+          },
+          "confidence": 0.53
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.92,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.03,
+            "1": 0.03,
+            "2": 0.94
+          },
+          "confidence": 0.88
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.58
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.91
+        }
+      }
+    },
+    {
+      "id": "28",
+      "message": "Not a fraud issue, I just want to know when the annual fee gets charged.",
+      "tags": "fraud_mention_not_fraud",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.404,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 719,
+      "output_tokens": 111,
+      "cost_usd": 3.0198e-05,
+      "reported_cost_usd": 3.0198e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "billing_question": 1,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "card_issue": 0,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.08,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.92,
+            "1": 0.08,
+            "2": 0
+          },
+          "confidence": 0.89
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.11
+        }
+      }
+    },
+    {
+      "id": "29",
+      "message": "I got charged twice for the same grocery order, $64.20 each. Also my login code takes forever to arrive.",
+      "tags": "two_issues",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.358,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 729,
+      "output_tokens": 111,
+      "cost_usd": 3.0618000000000004e-05,
+      "reported_cost_usd": 3.0618e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "card_issue": 0,
+            "billing_question": 1,
+            "other": 0,
+            "unauthorized_charge": 0,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.17,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.83,
+            "2": 0.17
+          },
+          "confidence": 0.74
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.07
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.89
+        }
+      }
+    },
+    {
+      "id": "30",
+      "message": "Customer service is the worst. Three weeks waiting for a refund. Unbelievable.",
+      "tags": "angry",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.35,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 720,
+      "output_tokens": 111,
+      "cost_usd": 3.0240000000000002e-05,
+      "reported_cost_usd": 3.024e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "card_issue": 0,
+            "billing_question": 1,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "account_access": 0
+          },
+          "confidence": 0.99
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.01,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.99,
+            "2": 0.01
+          },
+          "confidence": 0.98
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.86
+        }
+      }
+    },
+    {
+      "id": "31",
+      "message": "Your fraud team blocked my card because I bought a plane ticket. It was me! Please unblock it, I'm at the airport.",
+      "tags": "fraud_mention_not_fraud",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 2,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.417,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 730,
+      "output_tokens": 111,
+      "cost_usd": 3.066e-05,
+      "reported_cost_usd": 3.066e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "other": 0,
+            "unauthorized_charge": 0,
+            "billing_question": 0,
+            "card_issue": 1,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.84,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.16,
+            "2": 0.84
+          },
+          "confidence": 0.76
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.05
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.96
+        }
+      }
+    },
+    {
+      "id": "32",
+      "message": "Oh fantastic, another 'security update' that logged me out and now my password doesn't work. Love it.",
+      "tags": "sarcasm",
+      "expected": {
+        "category": "account_access",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.411,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 725,
+      "output_tokens": 111,
+      "cost_usd": 3.045e-05,
+      "reported_cost_usd": 3.045e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "card_issue": 0,
+            "billing_question": 0,
+            "account_access": 1,
+            "unauthorized_charge": 0,
+            "other": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.02,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.98,
+            "2": 0.02
+          },
+          "confidence": 0.96
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.07
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.84
+        }
+      }
+    },
+    {
+      "id": "33",
+      "message": "please i need help urgent my card is block and i cant pay rent today",
+      "tags": "non_native",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 2,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.354,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 717,
+      "output_tokens": 111,
+      "cost_usd": 3.0114e-05,
+      "reported_cost_usd": 3.0114e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "billing_question": 0,
+            "account_access": 0,
+            "card_issue": 1,
+            "other": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.74,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.25,
+            "2": 0.75
+          },
+          "confidence": 0.62
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.09
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.95
+        }
+      }
+    },
+    {
+      "id": "34",
+      "message": "somebody take 200 euro from my account with card, i never do this payment",
+      "tags": "non_native",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.365,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 721,
+      "output_tokens": 114,
+      "cost_usd": 3.0282000000000002e-05,
+      "reported_cost_usd": 3.0282e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "other": 0,
+            "card_issue": 0,
+            "billing_question": 0,
+            "unauthorized_charge": 1,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.89,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.11,
+            "2": 0.89
+          },
+          "confidence": 0.84
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.97
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.97
+        }
+      }
+    },
+    {
+      "id": "35",
+      "message": "Why was I charged a foreign transaction fee? I was on vacation in Portugal and used my card at a restaurant.",
+      "tags": "",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.41,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 725,
+      "output_tokens": 111,
+      "cost_usd": 3.045e-05,
+      "reported_cost_usd": 3.045e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 1,
+            "account_access": 0,
+            "card_issue": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.65,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.35,
+            "1": 0.65,
+            "2": 0
+          },
+          "confidence": 0.47
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.18
+        }
+      }
+    },
+    {
+      "id": "36",
+      "message": "I see a payment to QX*SERVICES 8821 that I don't recognize, but maybe it's my gym under a different name?",
+      "tags": "hedged",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.397,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 734,
+      "output_tokens": 114,
+      "cost_usd": 3.0828000000000004e-05,
+      "reported_cost_usd": 3.0828e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "unauthorized_charge": 0.89,
+            "other": 0,
+            "billing_question": 0.11,
+            "card_issue": 0,
+            "account_access": 0
+          },
+          "confidence": 0.86
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.13,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.83,
+            "2": 0.15
+          },
+          "confidence": 0.76
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.22
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.85
+        }
+      }
+    },
+    {
+      "id": "37",
+      "message": "Someone used my card at a gas station 300 miles away. I'm also wondering why my credit limit was lowered last month.",
+      "tags": "two_issues",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 0.453,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 730,
+      "output_tokens": 114,
+      "cost_usd": 3.066e-05,
+      "reported_cost_usd": 3.066e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "account_access": 0,
+            "billing_question": 0,
+            "other": 0,
+            "card_issue": 0,
+            "unauthorized_charge": 1
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.87,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.13,
+            "2": 0.87
+          },
+          "confidence": 0.81
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.96
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.96
+        }
+      }
+    },
+    {
+      "id": "38",
+      "message": "2fa not working",
+      "tags": "very_short",
+      "expected": {
+        "category": "account_access",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.388,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 706,
+      "output_tokens": 111,
+      "cost_usd": 2.9652e-05,
+      "reported_cost_usd": 2.9652e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "other": 0,
+            "unauthorized_charge": 0,
+            "billing_question": 0,
+            "card_issue": 0,
+            "account_access": 1
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.16,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.83,
+            "2": 0.17
+          },
+          "confidence": 0.74
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.08
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.65
+        }
+      }
+    },
+    {
+      "id": "39",
+      "message": "My account was hacked!! No wait, I just checked and it was my partner who bought the TV. Sorry, ignore this.",
+      "tags": "fraud_mention_not_fraud;retraction",
+      "expected": {
+        "category": "other",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.368,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 728,
+      "output_tokens": 110,
+      "cost_usd": 3.0576e-05,
+      "reported_cost_usd": 3.0576e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "account_access": 0.31,
+            "billing_question": 0.01,
+            "card_issue": 0,
+            "unauthorized_charge": 0.18,
+            "other": 0.5
+          },
+          "confidence": 0.38
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.02,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.98,
+            "1": 0.01,
+            "2": 0.01
+          },
+          "confidence": 0.97
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.53
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.22
+        }
+      }
+    },
+    {
+      "id": "40",
+      "message": "My card got swallowed by an ATM at the train station. What do I do?",
+      "tags": "",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.353,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 719,
+      "output_tokens": 111,
+      "cost_usd": 3.0198e-05,
+      "reported_cost_usd": 3.0198e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0.01,
+            "card_issue": 0.99,
+            "billing_question": 0,
+            "account_access": 0
+          },
+          "confidence": 0.99
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.15,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.85,
+            "2": 0.15
+          },
+          "confidence": 0.78
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.55
+        }
+      }
+    },
+    {
+      "id": "41",
+      "message": "Me and my wife we want open account together, is possible?",
+      "tags": "non_native",
+      "expected": {
+        "category": "other",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.365,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 715,
+      "output_tokens": 110,
+      "cost_usd": 3.0030000000000002e-05,
+      "reported_cost_usd": 3.003e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "other": 0.98,
+            "unauthorized_charge": 0,
+            "account_access": 0.02,
+            "card_issue": 0,
+            "billing_question": 0
+          },
+          "confidence": 0.98
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.01,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.99,
+            "1": 0.01,
+            "2": 0
+          },
+          "confidence": 0.99
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.15
+        }
+      }
+    },
+    {
+      "id": "42",
+      "message": "Someone called saying they were from your fraud department and asked for my card PIN. I gave it to them. Now there are two ATM withdrawals I didn't make.",
+      "tags": "scam",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 2,
+        "fraud_related": 1,
+        "needs_human": 1
+      },
+      "latency_s": 1.157,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 735,
+      "output_tokens": 114,
+      "cost_usd": 3.087e-05,
+      "reported_cost_usd": 3.087e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "other": 0,
+            "billing_question": 0,
+            "account_access": 0,
+            "card_issue": 0,
+            "unauthorized_charge": 1
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.98,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.02,
+            "2": 0.98
+          },
+          "confidence": 0.97
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.98
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.98
+        }
+      }
+    },
+    {
+      "id": "43",
+      "message": "How long does a refund take to appear on my statement after I return an item?",
+      "tags": "",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.336,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 719,
+      "output_tokens": 111,
+      "cost_usd": 3.0198e-05,
+      "reported_cost_usd": 3.0198e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 1,
+            "card_issue": 0,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.9,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.1,
+            "1": 0.9,
+            "2": 0
+          },
+          "confidence": 0.85
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.11
+        }
+      }
+    },
+    {
+      "id": "44",
+      "message": "Merchant charged me $45 instead of $4.50. Typo on their side I guess.",
+      "tags": "",
+      "expected": {
+        "category": "billing_question",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.377,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 724,
+      "output_tokens": 111,
+      "cost_usd": 3.0408e-05,
+      "reported_cost_usd": 3.0408e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "billing_question",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0,
+            "card_issue": 0,
+            "billing_question": 1,
+            "account_access": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.04,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.01,
+            "1": 0.95,
+            "2": 0.04
+          },
+          "confidence": 0.93
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.87
+        }
+      }
+    },
+    {
+      "id": "45",
+      "message": "my card is not arrive yet, i order it 3 weeks ago",
+      "tags": "non_native",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.41,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 716,
+      "output_tokens": 111,
+      "cost_usd": 3.0072000000000003e-05,
+      "reported_cost_usd": 3.0072e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 0,
+            "account_access": 0,
+            "card_issue": 1
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0.88,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.13,
+            "1": 0.86,
+            "2": 0.01
+          },
+          "confidence": 0.8
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.42
+        }
+      }
+    },
+    {
+      "id": "46",
+      "message": "Is my account safe? I read about a data breach at a store I shop at.",
+      "tags": "fraud_mention_not_fraud",
+      "expected": {
+        "category": "other",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 0
+      },
+      "latency_s": 0.368,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 720,
+      "output_tokens": 110,
+      "cost_usd": 3.0240000000000002e-05,
+      "reported_cost_usd": 3.024e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "unauthorized_charge": 0,
+            "billing_question": 0,
+            "account_access": 0.06,
+            "other": 0.94,
+            "card_issue": 0
+          },
+          "confidence": 0.92
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.36,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0.02,
+            "1": 0.61,
+            "2": 0.37
+          },
+          "confidence": 0.41
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.13
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.71
+        }
+      }
+    },
+    {
+      "id": "47",
+      "message": "Your security questions are ridiculous, who remembers their first teacher's name? Can't get in.",
+      "tags": "sarcasm",
+      "expected": {
+        "category": "account_access",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.448,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 721,
+      "output_tokens": 111,
+      "cost_usd": 3.0282000000000002e-05,
+      "reported_cost_usd": 3.0282e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "account_access",
+          "probabilities": {
+            "account_access": 1,
+            "unauthorized_charge": 0,
+            "other": 0,
+            "billing_question": 0,
+            "card_issue": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.99,
+            "2": 0.01
+          },
+          "confidence": 0.98
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.04
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.82
+        }
+      }
+    },
+    {
+      "id": "48",
+      "message": "Charge of $19.99 from MUSICBOX. I cancelled that subscription in March. Why am I still paying?",
+      "tags": "",
+      "expected": {
+        "category": "unauthorized_charge",
+        "urgency": 1,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.413,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 728,
+      "output_tokens": 114,
+      "cost_usd": 3.0576e-05,
+      "reported_cost_usd": 3.0576e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "unauthorized_charge",
+          "probabilities": {
+            "unauthorized_charge": 0.99,
+            "account_access": 0,
+            "other": 0,
+            "billing_question": 0.01,
+            "card_issue": 0
+          },
+          "confidence": 0.99
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.38,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.62,
+            "2": 0.38
+          },
+          "confidence": 0.42
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.06
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.89
+        }
+      }
+    },
+    {
+      "id": "49",
+      "message": "lost my card",
+      "tags": "very_short",
+      "expected": {
+        "category": "card_issue",
+        "urgency": 2,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.381,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 705,
+      "output_tokens": 111,
+      "cost_usd": 2.9610000000000003e-05,
+      "reported_cost_usd": 2.961e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "card_issue",
+          "probabilities": {
+            "card_issue": 1,
+            "other": 0,
+            "unauthorized_charge": 0,
+            "account_access": 0,
+            "billing_question": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.78,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0.22,
+            "2": 0.78
+          },
+          "confidence": 0.67
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.09
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.67
+        }
+      }
+    },
+    {
+      "id": "50",
+      "message": "I can log in fine, this isn't an access problem. I just want to change the name on my account after getting married.",
+      "tags": "negation",
+      "expected": {
+        "category": "other",
+        "urgency": 0,
+        "fraud_related": 0,
+        "needs_human": 1
+      },
+      "latency_s": 0.419,
+      "model": "typesafe/jev-1.13-20260917",
+      "input_tokens": 729,
+      "output_tokens": 110,
+      "cost_usd": 3.0618000000000004e-05,
+      "reported_cost_usd": 3.0618e-05,
+      "answers": {
+        "category": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "card_issue": 0,
+            "account_access": 0,
+            "billing_question": 0,
+            "other": 1,
+            "unauthorized_charge": 0
+          },
+          "confidence": 1
+        },
+        "urgency": {
+          "type": "score",
+          "score": 0,
+          "legend": {
+            "0": "Low: no time pressure, nothing at risk.",
+            "1": "Medium: customer is blocked or money is in question, but there is no ongoing loss.",
+            "2": "High: money may be actively leaving or account control may be compromised; needs action today."
+          },
+          "probabilities": {
+            "0": 1,
+            "1": 0,
+            "2": 0
+          },
+          "confidence": 0.99
+        },
+        "fraud_related": {
+          "type": "noul",
+          "noul": 0.02
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.23
+        }
+      }
+    }
+  ]
+}

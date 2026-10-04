@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     MAIL_PASSWORD: Optional[str] = Field(default=None)
     MAIL_DEFAULT_SENDER: Optional[str] = Field(default=None)
 
+    # OpenRouter API key
+    OPENROUTER_API_KEY: Optional[str] = Field(default=None)
+
 
     model_config = SettingsConfigDict(
         env_file=".env",

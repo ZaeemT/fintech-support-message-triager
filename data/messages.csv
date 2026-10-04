@@ -1,0 +1,51 @@
+id,message,category,urgency,fraud_related,needs_human,tags,notes
+1,"Someone took $480 out of my checking account last night. I didn't do it and I still have my card.",unauthorized_charge,2,1,1,,
+2,"There are three charges from STREAMFLIX for $15.99 and I only have one subscription.",billing_question,1,0,1,,"recognizes merchant, so billing not unauthorized"
+3,"How do I change the PIN on my debit card?",card_issue,0,0,0,,
+4,"locked out",account_access,1,0,1,very_short,
+5,"card declined",card_issue,1,0,1,very_short,
+6,"Got a text saying my account is suspended and I need to click a link to verify. Is this you?",other,1,0,0,fraud_mention_not_fraud,"attempt with no loss = fraud 0 (decided)"
+7,"Wow, great job charging me a $35 overdraft fee on a $2 coffee. Really loving this bank.",billing_question,1,0,1,sarcasm,"fee reversal request counted as dispute"
+8,"I forgot my password and the reset email never arrives. Also, any plans to let me pay with my watch?",account_access,1,0,1,two_issues,"help center could say check spam"
+9,"My wallet was stolen this morning with my card in it. No strange charges yet but I want to block the card.",card_issue,2,0,1,,"exposure without misuse = fraud 0 (decided)"
+10,"i not recieve my money transfer to my mother since 3 days, where is it?",other,1,0,1,non_native,"category gap: transfer status fits no label"
+11,"unknown charge $73",unauthorized_charge,1,1,1,very_short,
+12,"Someone changed the email and phone number on my account and now I can't log in.",account_access,2,1,1,,"account takeover: access + fraud"
+13,"Can I get a paper statement mailed to me every month?",billing_question,0,0,0,,
+14,"I watched a video about the fraud protection on your cards. How does it work exactly?",other,0,0,0,fraud_mention_not_fraud,
+15,"There's a $1.00 charge from a company I've never heard of. Is it a test charge?",unauthorized_charge,1,1,1,,"implied, not stated, that customer didn't make it"
+16,"help",other,0,0,1,very_short,"no information at all; urgency and needs_human are guesses"
+17,"My son made purchases in a game using my card without asking me. $230 total.",unauthorized_charge,1,1,1,family_member,"third party is family; still 'without permission'"
+18,"I bought a laptop for $1,200 and the shop never delivered it. I want my money back.",billing_question,1,0,1,,"merchant non-delivery could be a scam, labeled fraud 0"
+19,"A guy on a dating site convinced me to send him $3,000 for a plane ticket and now he's blocked me.",other,2,1,1,scam,"category gap: customer made the payment themselves, so not unauthorized_charge"
+20,"Your app keeps crashing when I open the cards tab.",other,1,0,1,,"category gap: technical bug. needs_human because help center can't fix a bug"
+21,"My new card arrived but the activation code in the letter doesn't work.",card_issue,1,0,1,,
+22,"Can I get a replacement card? The chip on mine is cracked.",card_issue,0,0,0,,
+23,"Thank you for fixing my issue so fast yesterday!",other,0,0,0,,
+24,"I DID NOT AUTHORIZE THIS!!! $89.50 FROM ONLINE GADGETS, FIX IT NOW",unauthorized_charge,2,1,1,all_caps,
+25,"Can't log in, says my account is locked for security reasons. I'm traveling abroad and need to pay for my hotel tonight.",account_access,2,0,1,,
+26,"Ich kann mich nicht mehr einloggen.",account_access,1,0,1,non_english,"German: 'I can't log in anymore.'"
+27,"fraud",other,2,1,1,very_short,"single word; category could be unauthorized_charge"
+28,"Not a fraud issue, I just want to know when the annual fee gets charged.",billing_question,0,0,0,fraud_mention_not_fraud,
+29,"I got charged twice for the same grocery order, $64.20 each. Also my login code takes forever to arrive.",billing_question,1,0,1,two_issues,"main issue = money, so billing first"
+30,"Customer service is the worst. Three weeks waiting for a refund. Unbelievable.",billing_question,1,0,1,angry,
+31,"Your fraud team blocked my card because I bought a plane ticket. It was me! Please unblock it, I'm at the airport.",card_issue,2,0,1,fraud_mention_not_fraud,
+32,"Oh fantastic, another 'security update' that logged me out and now my password doesn't work. Love it.",account_access,1,0,1,sarcasm,
+33,"please i need help urgent my card is block and i cant pay rent today",card_issue,2,0,1,non_native,
+34,"somebody take 200 euro from my account with card, i never do this payment",unauthorized_charge,2,1,1,non_native,
+35,"Why was I charged a foreign transaction fee? I was on vacation in Portugal and used my card at a restaurant.",billing_question,0,0,0,,"fee question the help center can answer, contrast with id 7"
+36,"I see a payment to QX*SERVICES 8821 that I don't recognize, but maybe it's my gym under a different name?",unauthorized_charge,1,0,1,hedged,"weak hunch = fraud 0 (decided). category still unauthorized_charge"
+37,"Someone used my card at a gas station 300 miles away. I'm also wondering why my credit limit was lowered last month.",unauthorized_charge,2,1,1,two_issues,
+38,"2fa not working",account_access,1,0,1,very_short,
+39,"My account was hacked!! No wait, I just checked and it was my partner who bought the TV. Sorry, ignore this.",other,0,0,0,"fraud_mention_not_fraud;retraction",
+40,"My card got swallowed by an ATM at the train station. What do I do?",card_issue,1,0,0,,
+41,"Me and my wife we want open account together, is possible?",other,0,0,0,non_native,
+42,"Someone called saying they were from your fraud department and asked for my card PIN. I gave it to them. Now there are two ATM withdrawals I didn't make.",unauthorized_charge,2,1,1,scam,
+43,"How long does a refund take to appear on my statement after I return an item?",billing_question,0,0,0,,
+44,"Merchant charged me $45 instead of $4.50. Typo on their side I guess.",billing_question,1,0,1,,
+45,"my card is not arrive yet, i order it 3 weeks ago",card_issue,1,0,1,non_native,
+46,"Is my account safe? I read about a data breach at a store I shop at.",other,1,0,0,fraud_mention_not_fraud,"exposure without misuse = fraud 0 (decided)"
+47,"Your security questions are ridiculous, who remembers their first teacher's name? Can't get in.",account_access,1,0,1,sarcasm,
+48,"Charge of $19.99 from MUSICBOX. I cancelled that subscription in March. Why am I still paying?",unauthorized_charge,1,0,1,,"charge after cancelling = unauthorized (decided). fraud 0, merchant error not third-party misuse?"
+49,"lost my card",card_issue,2,0,1,very_short,"exposure without misuse = fraud 0 (decided)"
+50,"I can log in fine, this isn't an access problem. I just want to change the name on my account after getting married.",other,0,0,1,negation,"needs_human: name change needs ID check"

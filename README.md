@@ -2,6 +2,8 @@
 
 A small API that reads a customer support message and decides what should happen to it: answer it automatically, put it in a review queue, or escalate it to a person now. It is built on **Jev**, TypeSafe AI's System One model, as a hands-on learning project.
 
+https://github.com/user-attachments/assets/f02d7a84-9181-40c7-8fab-96bdcd45810b
+
 ## The problem
 
 A fintech support inbox mixes very different messages:
